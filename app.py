@@ -1,11 +1,12 @@
 from flask import Flask, jsonify
+from typing import Dict, Tuple
 
 
 def create_app() -> Flask:
     app = Flask(__name__)
 
     @app.get("/")
-    def health() -> tuple[dict[str, str], int]:
+    def health() -> Tuple[Dict[str, str], int]:
         return jsonify({"status": "ok", "message": "Flask CI/CD demo"}), 200
 
     return app
