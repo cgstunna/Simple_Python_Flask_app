@@ -51,6 +51,11 @@ jobs:
             cd ${{ secrets.DEPLOY_PATH }}
             git pull origin main
             docker build -t flask-ci-demo:latest .
+            EXISTING_ON_80=$(docker ps -q --filter "publish=80")
+            if [ -n "$EXISTING_ON_80" ]; then
+              docker stop $EXISTING_ON_80 || true
+              docker rm $EXISTING_ON_80 || true
+            fi
             docker stop flask-ci-demo || true
             docker rm flask-ci-demo || true
             docker run -d --name flask-ci-demo -p 80:5000 flask-ci-demo:latest
