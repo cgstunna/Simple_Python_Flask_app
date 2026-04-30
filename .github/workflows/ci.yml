@@ -58,4 +58,4 @@ jobs:
             fi
             docker stop flask-ci-demo || true
             docker rm flask-ci-demo || true
-            docker run -d --name flask-ci-demo -p 80:5000 flask-ci-demo:latest
+            docker run -d --name flask-ci-demo -p 8080:5000 flask-ci-demo:latest
